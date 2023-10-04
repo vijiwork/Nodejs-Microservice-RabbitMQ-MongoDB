@@ -2,15 +2,23 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const dotenv = require('dotenv');
-const db=require('./db');
 const app = express();
+
+
+const src=require('./src/api')
+
 dotenv.config();
 
+app.use(express.json());
 app.set('port', process.env.PORT || 3000);
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+const db=require('./db');
+
+app.use('/api',src)
 
 app.listen(app.get('port'), () => {
 console.log(`Server is running on port ${app.get('port')}`);

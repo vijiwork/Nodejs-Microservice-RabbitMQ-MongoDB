@@ -1,6 +1,5 @@
-const express=require('express');
-const router=express.Router();
+const productModel=require('./product-model');
 
-router.use('/product',require('./product-model'));
 
-module.exports=router;
+
+module.exports=productModel;
